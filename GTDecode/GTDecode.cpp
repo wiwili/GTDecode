@@ -2,7 +2,9 @@
 // Quick project to decode Gemtrader's files
 // Decode method pulled with IDA
 #include "pch.h"
+//#define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
+//#include <crtdbg.h>
 #include <iostream>
 #include <fstream>
 #include<windows.h>
@@ -19,7 +21,7 @@ int main(int argc, char *argv[])
 {
 	if (argc < 2)
 	{
-		cout << "Usage: GTDecode.exe <inputs> \n Outputs will be created in the output folder";
+		cout << "Usage: GTDecode.exe <inputs> \nOutputs will be created in the output folder \n";
 	}
 	else
 	{
@@ -66,8 +68,13 @@ int main(int argc, char *argv[])
 				fout.close();
 				cout << "Created: " + output << endl;
 			}
+
+			// Free memory
+			free(result);
+			delete[] memBlock;
 		}
 	}
+	//_CrtDumpMemoryLeaks();
 	system("pause");
 }
 
